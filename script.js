@@ -4,7 +4,7 @@ const btnGenerateCat = document.querySelector(".js-generate-cat");
 
 const resultsContainer = document.querySelector(".js-catz");
 
-
+var numImg = 10;
 
 function fetchData (url) {
     return fetch(catApiURL)
@@ -15,3 +15,18 @@ function fetchData (url) {
             return response[0].url;
         })
     }
+
+
+
+    btnGenerateCat.addEventListener("click", function() {
+    
+        resultsContainer.innerHTML="";
+        
+            for (i = 0; i < numImg; i++) { 
+                fetchData(catApiURL).then(url => {
+                    let catImg = document.createElement('img');
+                    catImg.src = url;
+                    resultsContainer.appendChild(catImg);
+                });
+        }
+    });
